@@ -6,7 +6,7 @@ This is the code used to normalize juvenile observations for iNaturalist effort.
 
 ## Sim.py
 
-This is the main code used to run particle tracking simulations. To run this code, you must use a base, wind, current, and k-value dataset in NetCDF format, a landmask in TIFF format, and a weighted juvenile observation dataset in CSV format. 
+This is the main code used to run particle tracking simulations. To run this code, you must use a base, wind, current, and k-value dataset in NetCDF format, a landmask in TIFF format, and a weighted juvenile observation dataset in CSV format. The conda environment used to run this code is found in "sim-env.yml".
 
 ### Base Data
 

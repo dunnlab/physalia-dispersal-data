@@ -1,5 +1,9 @@
 # Data and code for Abedon et al., 2025
 
+## iNaturalist Data
+
+iNaturalist observations used for the juvenile study can be found in "physalia_obs.csv" and include all observations found within Study Area A (see Fig. 1 in Abedon et al., 2025). iNaturalist observations used for the US East Coast stranding study can be found in "physalia_obs_ec_land.csv" and include only observations from the US East Coast. For the EMD analysis in "temporal_emd.py", observations are further filtered to include only those observed within the simulation period from 1 Novemeber 2022 - 31 October 2023.
+
 ## effort_norm.py
 
 This is the code used to normalize juvenile observations for iNaturalist effort. “physalia_obs.csv” is surveyed for all observations of juvenile _P. physalis_ specimens, resulting in “juvenile_observations.csv”, containing only the juvenile entries. “Effort_norm.py” assigns each juvenile observation a weight using “sand_dollar_all.csv”, “sea_stars_all.csv”, and “hermit_crab_all.csv” as proxies for iNaturalist effort. The result is a weighted juvenile observation dataset that can be used to generate starting points in “sim.py” (see below). 

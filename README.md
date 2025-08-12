@@ -2,7 +2,7 @@
 
 ## iNaturalist Data
 
-iNaturalist observations used for the juvenile study can be found in "physalia_obs.csv" and include all observations found within Study Area A (see Fig. 1 in Abedon et al., 2025). iNaturalist observations used for the US East Coast stranding study can be found in "physalia_obs_ec_land.csv" and include only observations from the US East Coast. For the EMD analysis in "temporal_emd.py", observations are further filtered to include only those observed within the simulation period from 1 Novemeber 2022 - 31 October 2023.
+iNaturalist observations used for the juvenile study can be found in "physalia_obs.csv" and include all observations found within Study Area A (see Fig. 1 in Abedon et al., 2025). iNaturalist observations used for the US East Coast stranding study can be found in "physalia_obs_ec_land.csv" and include only observations from the US East Coast. For the EMD analysis in "temporal_emd.py", the East Coast observations are further filtered to include only those observed within the simulation period from 1 Novemeber 2022 - 31 October 2023.
 
 ## effort_norm.py
 

@@ -87,7 +87,7 @@ def compute_cost_matrix(bin_edges):
 
 def load_inat_data(inat_file, land_tif):
     """
-    Load iNaturalist data, filter for the year 2023, and determine its bounds.
+    Load iNaturalist data, filter for the relevant time period, and determine its bounds.
     """
     # Reference start time for simulation
     reference_start_time = datetime(2022, 11, 1)
@@ -235,8 +235,6 @@ def calculate_emd_for_all(output_dir, inat_file, land_tif):
     data_inat, lon_min, lon_max, lat_min, lat_max, time_min, time_max = load_inat_data(inat_file, land_tif)
     bins = [1, 5, 4]
     
-    # Prepare response values
-    #response_values = [round(value, 3) for value in np.arange(0.01, 0.1, 0.002)]
     all_emd_results = []
     # Collect EMD results
     for run_number in range(25):
@@ -263,7 +261,7 @@ def calculate_emd_for_all(output_dir, inat_file, land_tif):
 if __name__ == "__main__":
     output_dir = "/gpfs/gibbs/project/dunn/rba27/Buffer_50"
     inat_file = "/gpfs/gibbs/project/dunn/rba27/final_inat_ec_obs.csv
-    land_tif = "/gpfs/gibbs/project/dunn/rba27/america_raster2.tif"
+    land_tif = "/gpfs/gibbs/project/dunn/rba27/america_raster.tif"
 
     # Calculate EMDs and print the resulting DataFrame
     avg_emd_df = calculate_emd_for_all(output_dir, inat_file, land_tif)

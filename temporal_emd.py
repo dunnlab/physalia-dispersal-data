@@ -41,7 +41,7 @@ def visualize_spatial_bins_with_map(data, lon_min, lon_max, lat_min, lat_max, bi
     ax.set_xlabel('Longitude')
     ax.set_ylabel('Latitude')
     
-    output_file = "/gpfs/gibbs/project/dunn/rba27/Parameter_Sweep_Normalized/bins_vis_sim.png"
+    output_file = "/path/to/bins_vis_sim.png"
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
     plt.close(fig)
     print(f"Figure saved to {output_file}")
@@ -168,12 +168,12 @@ def process_simulation_result(run_number, data_inat, lon_min, lon_max, lat_min, 
     """
     simulation_reference_time = datetime(2022, 11, 1)
     
-    file_path = f"{output_dir}/beached_buffer_50_run_{run_number}_10000.csv"
+    file_path = f"{output_dir}/stranding_output_run_{run_number}.csv"
     simulated_data = pd.read_csv(file_path)[['Longitude', 'Latitude', 'time']]
     print("Before conversion:", simulated_data['time'][0])
     simulated_data['time'] = simulated_data['time'].apply(lambda t: simulation_reference_time + timedelta(seconds=t))
     print("After conversion:", simulated_data['time'][0])
-    common_reference_date = datetime(2022, 11, 1)  # Use the simulation start date or earliest date in both datasets
+    common_reference_date = datetime(2022, 11, 1)  # Use the simulation start date
     simulated_data['time'] = (simulated_data['time'] - common_reference_date).dt.total_seconds()
     simulated_data['time'] = simulated_data['time'] / (60 * 60 * 24)
     print(simulated_data['time'])
@@ -199,10 +199,6 @@ def process_simulation_result(run_number, data_inat, lon_min, lon_max, lat_min, 
 
     # Compute 3D EMD
     bins = [1, 5, 4]  # Number of bins for longitude, latitude, and time
-    '''
-    if file_path == f"{output_dir}/temporal_random_response_0018_run_1.csv":
-        visualize_spatial_bins_with_map(filtered_data, lon_min, lon_max, lat_min, lat_max, bins)
-    '''
     emd_value, emd_normalized = compute_3d_emd(data_inat, filtered_data, bins, lon_min, lon_max, lat_min, lat_max, time_min, time_max)
 
     return emd_value, emd_normalized
@@ -259,9 +255,9 @@ def calculate_emd_for_all(output_dir, inat_file, land_tif):
 
 # Main execution
 if __name__ == "__main__":
-    output_dir = "/gpfs/gibbs/project/dunn/rba27/Buffer_50"
-    inat_file = "/gpfs/gibbs/project/dunn/rba27/final_inat_ec_obs.csv
-    land_tif = "/gpfs/gibbs/project/dunn/rba27/america_raster.tif"
+    output_dir = "/path/to/outputdir"
+    inat_file = "/path/to/final_inat_ec_obs.csv
+    land_tif = "/path/to/land.tif"
 
     # Calculate EMDs and print the resulting DataFrame
     avg_emd_df = calculate_emd_for_all(output_dir, inat_file, land_tif)

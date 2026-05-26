@@ -1,0 +1,15 @@
+name: sim-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - xarray
+  - rasterio
+  - netcdf4       # NetCDF I/O for ocean current and wind fields
+  - zarr          # zarr output written by parcels
+  - parcels       # OceanParcels particle-tracking framework

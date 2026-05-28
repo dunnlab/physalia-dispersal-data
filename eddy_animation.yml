@@ -1,0 +1,23 @@
+name: eddy_animation_env
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.12
+  - numpy
+  - matplotlib
+  - xarray
+  - zarr
+  - netcdf4
+  - hdf5
+  - scipy
+  - pandas
+  - cartopy
+  - shapely
+  - pyproj
+  - geopandas
+  - ffmpeg
+
+  - pip:
+    - pyEddyTracker

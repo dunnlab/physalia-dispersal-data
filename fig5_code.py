@@ -198,10 +198,10 @@ def main():
                       lon_ticks=lon_ticks,
                       linewidth=0.3)
 
-    # --- North of Cape Hatteras strandings (lat 35.76417–42) ---
+    # --- North of Cape Hatteras strandings (lat 35.76417–43) ---
     print("Filtering North-of-Cape-Hatteras strandings...")
     df_noch = filter_beached_in_region(
-        zarr_file, min_lat=35.76417, max_lat=42)
+        zarr_file, min_lat=35.76417, max_lat=43)
     print("Plotting...")
     plot_trajectories(df_noch,
                       output_file=os.path.join(output_dir, 'trajectories_north_hatteras.png'),

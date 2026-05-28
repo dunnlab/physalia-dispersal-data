@@ -213,7 +213,7 @@ def main():
     # --- Never-stranded particles that entered the box north/east of 23.41412°N, 81.10163°W ---
     print("Filtering never-stranded particles that entered the target box...")
     df_ns = filter_nonstranding_entered_box(
-        zarr_file, box_min_lat=23.41412, box_min_lon=-81.10163)
+        zarr_file, box_min_lat=24.7, box_min_lon=-81.5)
     sampled_ids = np.random.choice(df_ns['trajectory'].unique(), size=500, replace=False)
     df_ns = df_ns[df_ns['trajectory'].isin(sampled_ids)]
     print("Plotting 500 randomly sampled trajectories...")

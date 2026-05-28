@@ -10,7 +10,7 @@ The code used to normalize juvenile observations for iNaturalist effort is provi
 
 ## Particle-tracking Model
 
-The primary particle-tracking simulation code is provided in "sim.py". To execute this code, a base grid must first be generated using "create_base_data.py". The CMEMS wind and current datasets used as forcing are available at Zenodo (10.5281/zenodo.20399401), and the landmask is provided as "landmask.tif". Particles are initalized based on an effort-normalized juvenile observation dataset generated using "effort_norm.py". The conda environment required to run this code is found in "sim-env.yml". The simulation is configured for parallel execution on a computing cluster. Each model run outputs particle trajectory data in zarr format and a CSV recording the time and location of strandings events. 
+The primary particle-tracking simulation code is provided in "sim.py". To execute this code, a base grid must first be generated using "create_base_data.py". The CMEMS wind and current datasets used as forcing are available through Zenodo (10.5281/zenodo.20399401), and the landmask is provided as "landmask.tif". Particles are initalized based on an effort-normalized juvenile observation dataset generated using "effort_norm.py". The conda environment required to run this code is found in "sim-env.yml". The simulation is configured for parallel execution on a computing cluster. Each model run outputs particle trajectory data in zarr format and a CSV recording the time and location of strandings events. 
 
 ### Base Data
 
@@ -22,4 +22,4 @@ The code used to generate figures in Abedon et al., (under review) is provided. 
 
 ## Supporting Information
 
-Animations of the particle-tracking model used for qualitative analysis and provided as a supporting figure were generated using 
+Animations of the particle-tracking model used for qualitative analysis and provided as a supporting figure were generated using "model_animation_si.py", which takes model output and two CMEMS environmental data files as input, available through Zenodo (10.5281/zenodo.20399401). Eddy detection and animation was done using "eddy_animation_si.py", which takes model output and GLO12 absolute dynamic topography data as input, also available through Zenodo (10.5281/zenodo.20399401).

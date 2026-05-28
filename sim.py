@@ -230,8 +230,8 @@ def run_simulation(fieldset, offshore_df, trial_number, output_directory,
                 u_physalia = u_current + u_wind_effective
                 v_physalia = v_current + v_wind_effective
 
-                particle.u_wind = u_wind_effective
-                particle.v_wind = v_wind_effective
+                particle.u_wind = u_wind
+                particle.v_wind = v_wind
                 particle.u_current = u_current
                 particle.v_current = v_current
 

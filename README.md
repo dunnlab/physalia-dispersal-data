@@ -1,12 +1,12 @@
-# Data and code for Abedon et al., 2025
+# Data and code for Abedon et al., under review
 
 ## iNaturalist Data
 
-iNaturalist observations used for the juvenile study can be found in "physalia_obs_juvenile_analysis.csv" and include all observations found within Study Area A (see Fig. 1 in Abedon et al., 2025) as exported on September 9th. iNaturalist observations used for the US East Coast stranding study can be found in "physalia_obs_ec_land.csv" and include all observations from the US East Coast as exported on October 17th. For the EMD analysis in "temporal_emd.py", the East Coast observations are further filtered to include only those observed within the simulation period from 1 Novemeber 2022 - 31 October 2023.
+iNaturalist observations used for the juvenile study (Fig. 2, Abedon et al., under review) are provided in "inat_pphysalis_obs_areaa_all.csv" and include all research-grade _P. physalis_ observations found within Study Area A (Fig. 1, Abedon et al., under review) as exported on 9 September 2024 and amended through October 2024 on 30 April 2026. Juvenile classifications assigned during the study are recorded in the "Classification" column, with the 194 observations classified as juveniles provided separately in "juvenile_observations.csv". iNaturalist observations used for the US East Coast stranding study (Fig. 3 & Fig. 4, Abedon et al., under review) are provided in "inat_pphysalis_obs_usec_2017-2024.csv". The code used to filter Area A observations to the US East Coast study region and time period is provided in "filter_for_eastcoast_stranding_obs.py". Observations are further filtered to  the simulation period (1 Novemeber 2022 - 31 October 2023) for spatiotemporal comparison with simulated strandings in 'sim_obs_spearmen_correlation.py'.
 
-## effort_norm.py
+## Juvenile Normalization
 
-This is the code used to normalize juvenile observations for iNaturalist effort. “physalia_obs.csv” is surveyed for all observations of juvenile _P. physalis_ specimens, resulting in “juvenile_observations.csv”, containing only the juvenile entries. “Effort_norm.py” assigns each juvenile observation a weight using “sand_dollar_all.csv”, “sea_stars_all.csv”, and “hermit_crab_all.csv” as proxies for iNaturalist effort. The result is a weighted juvenile observation dataset that can be used to generate starting points in “sim.py” (see below). 
+The code used to normalize juvenile observations for iNaturalist effort is provided in "effort_norm.py", which assigns each juvenile observation a weight using “sand_dollar_all.csv”, “sea_stars_all.csv”, and “hermit_crab_all.csv” as proxies for iNaturalist effort. The result is a weighted juvenile observation dataset that can be used to generate starting points in “sim.py” (see below). 
 
 ## Sim.py
 

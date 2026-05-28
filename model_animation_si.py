@@ -23,7 +23,7 @@ import cartopy.feature as cfeature
 # ============================================================
 BASE       = "/directory"
 ZARR_PATH  = f"{BASE}/run_(run_number)_output.zarr"
-SST_PATH   = f"{BASE}/GLO12_sst_cmems_2022-2023.nc.nc"
+SST_PATH   = f"{BASE}/GLO12_sst_cmems_2022-2023.nc"
 WIND_PATH  = f"{BASE}/ecmwf_bias_corrected_winds_cmems_2022-2023.nc"
 OUTPUT     = f"{BASE}/model_animation.mp4"
 

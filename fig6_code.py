@@ -7,6 +7,7 @@ import os
 import re
 from glob import glob
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import matplotlib.dates as mdates
 from matplotlib.font_manager import FontProperties
 from scipy.stats import pearsonr
@@ -21,6 +22,13 @@ OUTPUT_FIG = "/output/fig6.png"
 
 LAT_THRESHOLD = 39.5
 LON_THRESHOLD = -67.7
+
+# Sequential blue ramp, applied to the wind vectors by speed alone. Anchors are
+# spaced evenly in perceptual lightness (L* ~ 72 / 51 / 30 / 13) so the
+# darkening reads at a steady rate across the range.
+WIND_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    "wind_speed", ["#7CB8DC", "#2E7EBC", "#0A477F", "#06223F"]
+)
 
 highlight_bins = [
     ("2022-11-29", "2022-12-13"), ("2022-12-13", "2022-12-27"),
@@ -156,7 +164,10 @@ def parse_interval_string(s):
 def prep_particle_df(counts_df):
     counts_df = counts_df.copy()
     counts_df.index = counts_df.index.astype(str)
-    counts_df = counts_df.reset_index().rename(columns={"index": "Period"})
+    # reset_index() names the new column after the groupby key ("time_bin") on
+    # current pandas, not "index" — rename positionally so either works
+    counts_df = counts_df.reset_index()
+    counts_df = counts_df.rename(columns={counts_df.columns[0]: "Period"})
     counts_df["Period"] = counts_df["Period"].apply(parse_interval_string)
     counts_df["Period"] = counts_df["Period"].apply(lambda x: x.left if pd.notnull(x) else np.nan)
     counts_df.dropna(subset=["Period"], inplace=True)
@@ -213,9 +224,14 @@ def make_plot(particle_df, wind_file, output_fig):
     ax1.tick_params(axis='y', labelsize=20)
     ax1.tick_params(axis='x', labelsize=0)
 
-    # Bottom panel
+    # Bottom panel — vectors carry direction and intensity via length, with
+    # shade keyed to speed alone (light blue = weak, dark navy = strong)
+    speed = np.hypot(u_daily.values, v_daily.values)
+    speed_norm = mcolors.Normalize(vmin=0.0, vmax=float(np.nanmax(speed)))
+
     q = ax2.quiver(
-        dates_num, baseline, u_daily.values, v_daily.values,
+        dates_num, baseline, u_daily.values, v_daily.values, speed,
+        cmap=WIND_CMAP, norm=speed_norm,
         angles="xy", scale_units="xy", scale=0.9,
         width=0.0025, headlength=0, headwidth=0, headaxislength=0
     )
@@ -233,13 +249,15 @@ def make_plot(particle_df, wind_file, output_fig):
     ax2.set_ylabel("Average Wind \n Velocity (m/s)", fontsize=20, fontweight='bold')
 
     bold_font = FontProperties(weight='bold', size=16)
-    ax2.quiverkey(q, X=0.92, Y=0.9, U=10,
+    # Key arrow and label take the shade a real 10 m/s vector gets, so the key
+    # shows both its length and its colour
+    key_color = WIND_CMAP(speed_norm(10.0))
+    ax2.quiverkey(q, X=0.92, Y=0.9, U=10, color=key_color, labelcolor=key_color,
                   label="10 m/s", labelpos='E', coordinates='axes', fontproperties=bold_font)
 
     plt.tight_layout(h_pad=1.5)
-    plt.savefig(output_fig, dpi=600, bbox_inches='tight')
+    plt.savefig(output_fig, dpi=300, bbox_inches='tight')
     print(f"Figure saved to {output_fig}")
-    plt.show()
 
 
 # ---------------------------------------------------------------------------
